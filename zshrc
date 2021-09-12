@@ -79,6 +79,8 @@ alias wget="curl -O --retry 999 --retry-max-time 0 "
 
 alias fastping="ping -i 0.2"
 
+alias ports="netstat -ant -p TCP | grep LISTEN"
+
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
 
