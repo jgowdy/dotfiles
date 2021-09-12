@@ -1,0 +1,37 @@
+- clean: ['~']
+
+- link:
+    ~/.gitconfig: gitconfig
+    ~/.ssh/config:
+        path: ssh/config
+        create: true
+    ~/.zprofile: zprofile
+    ~/.zshrc: zshrc
+    ~/.config/kitty:
+      glob: true
+      path: config/kitty/*
+      create: true
+    ~/.config/containers/registries.conf:
+      path: config/containers/registries.conf
+      create: true
+    ~/.config/systemd/user/dropbox.service:
+      path: config/systemd/user/dropbox.service
+      create: true
+    ~/.config/lvim/config.lua:
+      path: lvim/config.lua
+      create: true
+    ~/.irssi/config:
+      path: irssi/config
+      create: true
+    ~/.nuget/NuGet/NuGet.Config:
+      path: NuGet.Config
+      create: true
+    ~/.editorconfig: editorconfig
+    ~/.screenrc: screenrc
+    ~/.gitignore: gitignore
+    ~/.gdbinit: gdbinit
+    ~/.wgetrc: wgetrc
+    ~/.mutt:
+      glob: true
+      path: mutt/*
+      create: true

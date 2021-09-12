@@ -1,0 +1,20 @@
+set imap_user="jeremiah@gowdy.me"
+set ssl_force_tls = yes
+set from = "jeremiah@gowdy.me"
+set realname = "Jeremiah Gowdy"
+set smtp_url = "smtps://jeremiah@gowdy.me@smtp.gmail.com:465"
+set folder = "imaps://imap.gmail.com/"
+set spoolfile = "+INBOX"
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
+set trash = "+[Gmail]/Trash"
+set text_flowed = yes
+set use_8bitmime = yes
+set imap_keepalive = 300
+set mail_check = 60
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+set smtp_authenticators = "gssapi:login"
+set header_cache_compress = yes
+source muttpassword

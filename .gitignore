@@ -1,0 +1,3 @@
+*.lock.json
+mutt/cache/bodies
+mutt/cache/headers

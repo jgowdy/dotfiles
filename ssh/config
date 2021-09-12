@@ -1,0 +1,9 @@
+IdentityFile ~/.ssh/id_ed25519
+
+Host bx
+User jgowdy
+ForwardX11 yes
+
+Host mac
+User jsmith
+HostName 192.168.50.177

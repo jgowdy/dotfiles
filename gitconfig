@@ -1,0 +1,29 @@
+[user]
+    name = Jeremiah Gowdy
+    email = jeremiah@gowdy.me
+    signingkey = 4F2FF80BF95DEC07
+[pull]
+    rebase = true
+[push]
+    default = simple
+[init]
+    defaultBranch = main
+[core]
+    autocrlf = input
+    preloadIndex = true
+[color]
+    ui = auto
+[commit]
+    gpgsign = true
+[diff]
+    tool = kitty
+    guitool = kitty.gui
+[difftool]
+    prompt = false
+    trustExitCode = true
+[difftool "kitty"]
+    cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+    cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+[gpg]
+    program = gpg
