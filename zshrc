@@ -77,6 +77,8 @@ alias git-flatten='git reset $(git commit-tree HEAD^{tree} --gpg-sign -m "Flatte
 
 alias wget="curl -O --retry 999 --retry-max-time 0 "
 
+alias fastping="ping -i 0.2"
+
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
 
