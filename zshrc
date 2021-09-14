@@ -12,20 +12,28 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     #fi
 
     # Use Homebrew version of openssl binary
-    alias openssl="/opt/homebrew/opt/openssl/bin/openssl"
+    if [ -f /opt/homebrew/opt/openssl/bin/openssl ]; then
+	alias openssl="/opt/homebrew/opt/openssl/bin/openssl"
+    fi
 
     # File encrypt and decrypt with -in infile -out outfile
     alias enc="/opt/homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2"
     alias dec="/opt/homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2 -d"
 
-    # Use gnuls on macOS
-    alias ls="gls -laFG --color=auto"
+    # Use gnuls on macOS if it exists
+    if which gls 2>&1 >/dev/null; then
+        alias ls="gls -laFG --color=auto"
+    else
+        alias ls="ls -laFG"
+    fi
 
     # Use gnugrep on macOS
-    alias grep="ggrep --color=auto"
+    if which ggrep 2>&1 >/dev/null; then
+        alias grep="ggrep --color=auto"
+    fi
 
-    # Use arm64 override for Homebrew for M1
-    alias brew="arch -arm64 brew"
+    # Use arch -64 override to fix Homebrew for M1
+    alias brew="arch -64 brew"
 
     # Image-cat for kitty
     alias icat="kitty +kitten icat"
@@ -59,7 +67,6 @@ alias docker=podman
 
 # Vim is always lunarvim
 #alias vim="lvim"
-#alias nvim="lvim"
 
 # Launch lunarvim
 alias l="lvim"
