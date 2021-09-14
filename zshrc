@@ -58,8 +58,8 @@ fi
 alias docker=podman
 
 # Vim is always lunarvim
-alias vim="lvim"
-alias nvim="lvim"
+#alias vim="lvim"
+#alias nvim="lvim"
 
 # Launch lunarvim
 alias l="lvim"
