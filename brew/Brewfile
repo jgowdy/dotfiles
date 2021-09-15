@@ -1,6 +1,8 @@
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
+tap "homebrew/cask"
+tap "homebrew/services"
 
 # Need this for podman on macOS M1
 #tap "simnalamburt/x"
@@ -61,6 +63,7 @@ brew "openssh"
 brew "openssl@1.1"
 brew "p7zip"
 brew "pcre"
+brew "podman"
 brew "pre-commit"
 brew "pyenv"
 brew "rbenv"
@@ -83,6 +86,7 @@ brew "zstd"
 
 # Casks are ignored/skipped on Linuxbrew
 
+# Development tools
 cask "android-studio"
 cask "intellij-idea"
 cask "visual-studio-code"
@@ -90,41 +94,52 @@ cask "goland"
 cask "rider"
 cask "sublime-text"
 cask "drawio"
+cask "wireshark"
 cask "ngrok"
-cask "font-hack-nerd-font"
 
+# Terminal tools
+cask "font-hack-nerd-font"
 cask "kitty"
 cask "xquartz"
 
+# Auth tools
 cask "1password"
 cask "authy"
 
+# Communication tools
 cask "signal"
 cask "slack"
 cask "zoom"
 
-cask "cakebrew"
-cask "amazon-photos"
-cask "backblaze"
+# Browsers
 cask "eloston-chromium"
 cask "firefox"
-cask "coconutbattery"
-cask "mullvadvpn"
-cask "macupdater"
-cask "parallels"
-cask "microsoft-remote-desktop"
-cask "wireshark"
-cask "crossover"
-cask "trezor-suite"
-cask "keka"
-cask "cloudapp"
-cask "dropbox"
+cask "brave-browser" # To be removed
 
+# Cloud services
+cask "mullvadvpn"
+cask "amazon-photos"
+cask "dropbox"
+cask "backblaze"
+cask "cloudapp"
+
+# Utilities
+cask "cakebrew"
+cask "coconutbattery"
+cask "macupdater"
+cask "keka"
+cask "microsoft-remote-desktop"
+
+#cask "trezor-suite"
+
+# Gaming
 
 cask "epic-games"
 cask "steam"
 cask "battle-net"
 cask "minecraft"
+cask "crossover"
+cask "parallels" # For Windows
 
 # Casks that require sudo go last
 
