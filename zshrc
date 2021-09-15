@@ -69,7 +69,7 @@ alias docker=podman
 alias vim="nvim"
 
 # Launch lunarvim
-lias l="lvim"
+alias l="lvim"
 
 # Get current IPv4 address
 alias checkip="curl https://checkip.amazonaws.com"
