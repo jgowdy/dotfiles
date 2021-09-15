@@ -86,6 +86,9 @@ alias fastping="ping -i 0.2"
 
 alias ports="sudo netstat -ant -p TCP | grep LISTEN"
 
+alias reset-podman="podman machine stop ; sleep 1; podman machine rm ; podman machine init ; podman machine start"
+alias nuke-podman="podman system prune --all --force && podman rmi --all && podman system reset && sudo rm -rf ~/.local/share/containers"
+
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
 
