@@ -66,10 +66,10 @@ fi
 alias docker=podman
 
 # Vim is always lunarvim
-#alias vim="lvim"
+alias vim="nvim"
 
 # Launch lunarvim
-alias l="lvim"
+lias l="lvim"
 
 # Get current IPv4 address
 alias ip="curl https://checkip.amazonaws.com"
@@ -81,8 +81,6 @@ alias test-gpg='echo “Test” | gpg --clearsign -v'
 alias mutt='neomutt'
 
 alias git-flatten='git reset $(git commit-tree HEAD^{tree} --gpg-sign -m "Flatten")'
-
-alias wget="curl -O --retry 999 --retry-max-time 0 "
 
 alias fastping="ping -i 0.2"
 
