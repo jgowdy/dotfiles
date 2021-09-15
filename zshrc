@@ -72,7 +72,7 @@ alias vim="nvim"
 lias l="lvim"
 
 # Get current IPv4 address
-alias ip="curl https://checkip.amazonaws.com"
+alias checkip="curl https://checkip.amazonaws.com"
 
 # Deal with gpg-agent being unreliable
 alias reset-gpg='gpgconf --kill gpg-agent'
