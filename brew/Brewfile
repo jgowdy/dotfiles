@@ -5,8 +5,8 @@ tap "homebrew/cask"
 tap "homebrew/services"
 
 # Need this for podman on macOS M1
-#tap "simnalamburt/x"
-#brew "simnalamburt/x/podman-apple-silicon"
+tap "simnalamburt/x"
+brew "simnalamburt/x/podman-apple-silicon"
 
 brew "autoconf"
 brew "automake"
@@ -49,6 +49,7 @@ brew "libtiff"
 brew "libtool"
 brew "m4"
 brew "make"
+brew "mas"
 brew "mpdecimal"
 brew "mpfr"
 brew "mtr"
@@ -113,7 +114,6 @@ cask "zoom"
 # Browsers
 cask "eloston-chromium"
 cask "firefox"
-cask "brave-browser" # To be removed
 
 # Cloud services
 cask "mullvadvpn"

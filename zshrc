@@ -98,3 +98,5 @@ export EDITOR='lvim'
 export GIT_EDITOR='lvim'
 export GPG_TTY=$(tty)
 export PS1='%n@%m %1~ %# '
+
+eval "$(rbenv init -)"
