@@ -100,3 +100,5 @@ export GPG_TTY=$(tty)
 export PS1='%n@%m %1~ %# '
 
 eval "$(rbenv init -)"
+eval "$(pyenv init -)"
+eval "$(jenv init -)"

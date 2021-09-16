@@ -84,6 +84,11 @@ brew "wget"
 brew "xz"
 brew "zstd"
 
+# OpenJDK installs to use with jenv
+brew "openjdk"
+brew "openjdk@11"
+brew "microsoft-openjdk"
+
 # Casks are ignored/skipped on Linuxbrew
 
 # Development tools
