@@ -41,6 +41,7 @@ brew "htop"
 brew "httpie"
 brew "imagemagick"
 brew "irssi"
+brew "jenv"
 brew "jpeg"
 brew "lazygit"
 brew "libevent"
@@ -87,7 +88,7 @@ brew "zstd"
 # OpenJDK installs to use with jenv
 brew "openjdk"
 brew "openjdk@11"
-brew "microsoft-openjdk"
+cask "microsoft-openjdk"
 
 # Casks are ignored/skipped on Linuxbrew
 
@@ -147,7 +148,7 @@ cask "openra"
 # Virtualization / Emulation
 cask "crossover"
 cask "parallels" # For Windows
-cask "dosbox-x"
+brew "dosbox-x"
 
 # Casks that require sudo go last
 
