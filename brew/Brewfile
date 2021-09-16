@@ -142,8 +142,12 @@ cask "epic-games"
 cask "steam"
 cask "battle-net"
 cask "minecraft"
+cask "openra"
+
+# Virtualization / Emulation
 cask "crossover"
 cask "parallels" # For Windows
+cask "dosbox-x"
 
 # Casks that require sudo go last
 
