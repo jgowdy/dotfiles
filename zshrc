@@ -47,7 +47,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     alias brave="\"/Applications/Brave Browser.app/Contents/MacOS/Brave Browser\""
     alias safari="/Applications/Safari.app/Contents/MacOS/Safari"
 
-    export BROWSER='brave'
+    export BROWSER='firefox'
 
     export JAVA_HOME=$(/usr/libexec/java_home -v11)
 else
@@ -92,6 +92,7 @@ alias nuke-podman="podman system prune --all --force && podman rmi --all && podm
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
 
+export CC=gcc
 export LANG=en_US.UTF-8
 export TERMINAL='kitty'
 export EDITOR='lvim'
