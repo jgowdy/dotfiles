@@ -10,6 +10,9 @@ charset = utf-8
 tab_width = 4
 max_line_length = 120
 
+[*.rb]
+indent_size = 2
+
 # Use 2 spaces for the HTML files
 [*.html]
 indent_size = 2
