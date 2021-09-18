@@ -12,13 +12,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     #fi
 
     # Use Homebrew version of openssl binary
-    if [ -f /opt/homebrew/opt/openssl/bin/openssl ]; then
-	alias openssl="/opt/homebrew/opt/openssl/bin/openssl"
+    if [ -f $HOME/.homebrew/opt/openssl/bin/openssl ]; then
+	alias openssl="$HOME/.homebrew/opt/openssl/bin/openssl"
     fi
 
     # File encrypt and decrypt with -in infile -out outfile
-    alias enc="/opt/homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2"
-    alias dec="/opt/homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2 -d"
+    alias enc="$HOME/.homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2"
+    alias dec="$HOME/.homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2 -d"
 
     # Use gnuls on macOS if it exists
     if which gls 2>&1 >/dev/null; then
@@ -43,10 +43,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     alias d="kitty +kitten diff"
 
-    # Launch browsers
-    alias brave="\"/Applications/Brave Browser.app/Contents/MacOS/Brave Browser\""
-    alias safari="/Applications/Safari.app/Contents/MacOS/Safari"
-
     export BROWSER='firefox'
 
     export JAVA_HOME=$(/usr/libexec/java_home -v11)
@@ -66,7 +62,9 @@ fi
 alias docker=podman
 
 # Vim is always lunarvim
-alias vim="nvim"
+if which nvim 2>&1 >/dev/null; then
+    alias vim="nvim"
+fi
 
 # Launch lunarvim
 alias l="lvim"

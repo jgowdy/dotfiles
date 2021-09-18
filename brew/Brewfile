@@ -1,22 +1,5 @@
 tap "homebrew/core"
 
-# Need different podman for Apple M1
-if OS.mac? && Hardware::CPU.physical_cpu_arm64?
-  tap "simnalamburt/x"
-  brew "simnalamburt/x/podman-apple-silicon"
-else
-  brew "podman"
-end
-
-if OS.mac?
-  mas "PCalc", id: 403504866
-  mas "Pocket", id: 568494494
-  mas "Amphetamine", id: 937984704
-  mas "Xcode", id: 497799835
-  mas "Remote Desktop", id: 409907375
-  mas "Microsoft To Do", id: 1274495053
-end
-
 brew "autoconf"
 brew "automake"
 brew "aws-console"
@@ -159,4 +142,22 @@ if OS.mac?
   # Casks that require sudo go last
   cask "dotnet-sdk"
 
+end
+
+# Need different podman for Apple M1
+if OS.mac? && Hardware::CPU.physical_cpu_arm64?
+  tap "simnalamburt/x"
+  brew "simnalamburt/x/podman-apple-silicon"
+else
+  brew "podman"
+end
+
+if OS.mac?
+  brew "mas"
+  mas "PCalc", id: 403504866
+  mas "Pocket", id: 568494494
+  mas "Amphetamine", id: 937984704
+  mas "Xcode", id: 497799835
+  mas "Remote Desktop", id: 409907375
+  mas "Microsoft To Do", id: 1274495053
 end

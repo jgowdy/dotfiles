@@ -1,16 +1,6 @@
 # If Homebrew is installed, let Homebrew set its variables
-if [ -d "/opt/homebrew/bin" ] ; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# Legacy Homebrew path?
-if [ -d "/usr/local/Homebrew/bin" ] ; then
-    eval "$(/usr/local/Homebrew/bin/brew shellenv)"
-fi
-
-# If Linuxbrew is installed, let Linuxbrew set its variables
-if [ -d "/home/linuxbrew/.linuxbrew/bin" ] ; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [ -d "$HOME/.homebrew" ] ; then
+    eval "$($HOME/.homebrew/bin/brew shellenv)"
 fi
 
 # Prepend private ~/bin to PATH
