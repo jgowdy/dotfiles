@@ -13,12 +13,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # Use Homebrew version of openssl binary
     if [ -f $HOME/.homebrew/opt/openssl/bin/openssl ]; then
-	alias openssl="$HOME/.homebrew/opt/openssl/bin/openssl"
+	alias openssl="/opt/homebrew/opt/openssl/bin/openssl"
     fi
 
     # File encrypt and decrypt with -in infile -out outfile
-    alias enc="$HOME/.homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2"
-    alias dec="$HOME/.homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2 -d"
+    alias enc="/opt/homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2"
+    alias dec="/opt/homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2 -d"
 
     # Use gnuls on macOS if it exists
     if which gls 2>&1 >/dev/null; then
