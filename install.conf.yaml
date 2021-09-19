@@ -35,3 +35,4 @@
       glob: true
       path: mutt/*
       create: true
+    ~/.tarsnaprc: tarsnaprc

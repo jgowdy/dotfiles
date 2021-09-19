@@ -107,7 +107,7 @@ if OS.mac?
   cask "zoom"
 
   # Browsers
-  cask "eloston-chromium"
+  cask "eloston-chromium", no_quarantine: true
   cask "firefox"
 
   # Cloud services
