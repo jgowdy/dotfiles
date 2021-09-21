@@ -6,7 +6,7 @@ export CC=gcc
 export LANG=en_US.UTF-8
 export TERMINAL='kitty'
 export GPG_TTY=$(tty)
-#export PS1='%n@%m %1~ %# '
+export PS1='%n@%m %1~ %# '
 export BROWSER='firefox'
 
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
@@ -34,9 +34,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         # kitty diff
         alias d="kitty +kitten diff"
     fi
-    export PS1=$'\e[1;94m%n@%m %1~ %# \e[0m'
+    export PS1='%F{33}%n@%m %1~ %f %# '
 else
-    export PS1=$'\e[0;92m%n@%m %1~ %# \e[0m'
+    export PS1=$'%F{82}%n@%m %1~ %f %# '
 fi
 
 # Universal aliases / variables
