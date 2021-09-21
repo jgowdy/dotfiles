@@ -34,7 +34,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         # kitty diff
         alias d="kitty +kitten diff"
     fi
-    export PS1=$'\e[0;94m%n@%m %1~ %# \e[0m'
+    export PS1=$'\e[1;94m%n@%m %1~ %# \e[0m'
 else
     export PS1=$'\e[0;92m%n@%m %1~ %# \e[0m'
 fi
