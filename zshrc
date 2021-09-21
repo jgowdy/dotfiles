@@ -2,7 +2,17 @@ HISTSIZE=1000000000
 SAVEHIST=1000000000
 HISTFILE=~/.zsh_history
 
-# OS specific aliases
+export CC=gcc
+export LANG=en_US.UTF-8
+export TERMINAL='kitty'
+export GPG_TTY=$(tty)
+export PS1='%n@%m %1~ %# '
+export BROWSER='firefox'
+
+bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
+
+# macOS specific aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # Attempt to force the use of arm64 binaries
@@ -11,60 +21,74 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     #    exec arch -arm64e zsh
     #fi
 
-    # Use Homebrew version of openssl binary
-    if [ -f $HOME/.homebrew/opt/openssl/bin/openssl ]; then
-	alias openssl="/opt/homebrew/opt/openssl/bin/openssl"
-    fi
-
-    # File encrypt and decrypt with -in infile -out outfile
-    alias enc="/opt/homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2"
-    alias dec="/opt/homebrew/opt/openssl/bin/openssl enc -chacha20 -pbkdf2 -d"
-
-    # Use gnuls on macOS if it exists
-    if which gls 2>&1 >/dev/null; then
-        alias ls="gls -laFG --color=auto"
-    else
-        alias ls="ls -laFG"
-    fi
-
-    # Use gnugrep on macOS
-    if which ggrep 2>&1 >/dev/null; then
-        alias grep="ggrep --color=auto"
-    fi
-
     # Use arch -64 override to fix Homebrew for M1
     alias brew="arch -64 brew"
 
-    # Image-cat for kitty
-    alias icat="kitty +kitten icat"
+    if [[ "$TERM" == "xterm-kitty" ]]; then
+        # Image-cat for kitty
+        alias icat="kitty +kitten icat"
 
-    # SSH with kitty termcap
-    alias kssh="kitty +kitten ssh"
+        # SSH with kitty termcap
+        alias kssh="kitty +kitten ssh"
 
-    alias d="kitty +kitten diff"
+        # kitty diff
+        alias d="kitty +kitten diff"
+    fi
+fi
 
-    export BROWSER='firefox'
+# Universal aliases / variables
 
-    export JAVA_HOME=$(/usr/libexec/java_home -v11)
+# Use Homebrew gnuls if it exists
+if [ -e $HOMEBREW_PREFIX/bin/gls ] ; then
+    alias ls="$HOMEBREW_PREFIX/bin/gls -laFG --color=auto"
 else
-    alias ls="ls -laFG --color=auto"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # Darwin built in gnuls
+        alias ls="ls -laFG"
+    else
+        # Linux built in gnuls
+        alias ls="ls -laFG --color=auto"
+    fi
+fi
+
+# Use Homebrew version of gnugrep if it exists
+if [ -e $HOMEBREW_PREFIX/bin/ggrep ] ; then
+    alias grep="$HOMEBREW_PREFIX/bin/ggrep --color=auto"
+fi
+
+# Use Homebrew version of openssl binary if it exists
+if [ -e $HOMEBREW_PREFIX/bin/openssl ]; then
+    alias openssl="$HOMEBREW_PREFIX/bin/openssl"
 
     # File encrypt and decrypt with -in infile -out outfile
-    alias enc="/home/linuxbrew/.linuxbrew/bin/openssl enc -chacha20 -pbkdf2"
-    alias dec="/home/linuxbrew/.linuxbrew/bin/openssl enc -chacha20 -pbkdf2 -d"
-
-    export BROWSER='firefox'
+    alias enc="$HOMEBREW_PREFIX/bin/openssl enc -chacha20 -pbkdf2"
+    alias dec="$HOMEBREW_PREFIX/bin/openssl enc -chacha20 -pbkdf2 -d"
 fi
 
-# Universal aliases
-
-# We always use podman
-alias docker=podman
-
-# Vim is always lunarvim
-if which nvim 2>&1 >/dev/null; then
-    alias vim="nvim"
+# Prefer lunarvim
+if [ -e "$HOME/.local/bin/lvim" ]; then
+    export EDITOR="$HOME/.local/bin/lvim"
+    alias vim="$EDITOR"
+    alias nvim="$EDITOR"
+    alias l="$EDITOR"
+else
+    # If lunarvim isn't installed, prefer neovim
+    if which nvim 2>&1 >/dev/null; then
+        export EDITOR="$(which nvim)"
+        alias vim="$EDITOR"
+        alias nvim="$EDITOR"
+    else
+        export EDITOR="$(which vim)"
+    fi
 fi
+export GIT_EDITOR="$EDITOR"
+
+# We always use podman if it exists
+if which podman 2>&1 >/dev/null; then
+    alias docker=podman
+fi
+
+alias mutt='neomutt'
 
 # Launch lunarvim
 alias l="lvim"
@@ -76,28 +100,31 @@ alias checkip="curl https://checkip.amazonaws.com"
 alias reset-gpg='gpgconf --kill gpg-agent'
 alias test-gpg='echo “Test” | gpg --clearsign -v'
 
-alias mutt='neomutt'
-
+# Custom helpers
 alias git-flatten='git reset $(git commit-tree HEAD^{tree} --gpg-sign -m "Flatten")'
-
 alias fastping="ping -i 0.2"
-
 alias ports="sudo netstat -ant -p TCP | grep LISTEN"
-
 alias reset-podman="podman machine stop ; sleep 1; podman machine rm ; podman machine init ; podman machine start"
 alias nuke-podman="podman system prune --all --force && podman rmi --all && podman system reset && sudo rm -rf ~/.local/share/containers"
 
-bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
-bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
 
-export CC=gcc
-export LANG=en_US.UTF-8
-export TERMINAL='kitty'
-export EDITOR='lvim'
-export GIT_EDITOR='lvim'
-export GPG_TTY=$(tty)
-export PS1='%n@%m %1~ %# '
 
-eval "$(rbenv init -)"
-eval "$(pyenv init -)"
-eval "$(jenv init -)"
+if ! source .cache/rbenv-init.zsh ; then
+    echo "Building rbenv init cache file"
+    rbenv init - > .cache/rbenv-init.zsh
+    source .cache/rbenv-init.zsh
+fi
+
+if ! source .cache/pyenv-init.zsh ; then
+    echo "Building pyenv init cache file"
+    pyenv init - > .cache/pyenv-init.zsh
+    source .cache/pyenv-init.zsh
+fi
+
+if ! source .cache/jenv-init.zsh ; then
+    echo "Building jenv init cache file"
+    jenv init - > .cache/jenv-init.zsh
+    source .cache/jenv-init.zsh
+fi
+
+

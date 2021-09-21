@@ -1,11 +1,17 @@
-# If Homebrew is installed, let Homebrew set its variables
-if [ -d "/opt/homebrew/bin" ] ; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# If Linuxbrew is installed, let Linuxbrew set its variables
-if [ -d "/home/linuxbrew/.linuxbrew/bin" ] ; then
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Load Homebrew shellenv
+if ! source .cache/homebrew.zsh ; then
+    if [ -d "/opt/homebrew/bin" ] ; then
+        echo "Homebrew installed, creating shellenv cache file"
+	/opt/homebrew/bin/brew shellenv > .cache/homebrew.zsh
+        source .cache/homebrew.zsh
+    elif [ -d "/home/linuxbrew/.linuxbrew/bin" ] ; then
+	echo "Linuxbrew installed, creating shellenv cache file"
+	/home/linuxbrew/.linuxbrew/bin/brew shellenv > .cache/homebrew.zsh
+        source .cache/homebrew.zsh
+    else
+        echo "Homebrew not installed, caching empty results"
+        echo "" > .cache/homebrew.zsh
+    fi
 fi
 
 # Prepend private ~/bin to PATH

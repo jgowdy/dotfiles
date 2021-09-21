@@ -33,7 +33,58 @@ humanize-numbers
 # commands may be given.
 #exclude
 
-exclude ~/.ssh
+exclude Dropbox
+exclude .dropbox
+
+exclude Downloads
+exclude *.iso
+exclude *.dmg
+
+exclude *.core
+
+exclude *Caches*
+exclude *caches*
+exclude .cache
+exclude *Cache*
+exclude *cache*
+
+exclude sdk
+exclude JavaVirtualMachines
+exclude *DeviceSupport
+
+exclude CrossOver
+exclude Mail
+exclude CoreSimulator
+exclude IndexedDB
+exclude *Containers*
+exclude *containers*
+exclude CoreSpotlight
+exclude com~apple~CloudDocs
+
+exclude .gradle
+exclude .android
+
+exclude .zsh_sessions
+
+exclude tarsnap.log
+
+exclude .git
+exclude .cmake-js
+exclude .m2
+exclude .vscode
+exclude .vpython-root
+exclude .pyenv
+exclude .rbenv
+exclude .node-gyp
+exclude .cocoapods
+exclude .npm
+exclude .jenv
+exclude .dotnet
+
+exclude dotbot
+exclude *.hds
+
+exclude steamapps
 
 # Include only files and directories matching specified patterns.
 # Only one file or directory per command; multiple "include"
