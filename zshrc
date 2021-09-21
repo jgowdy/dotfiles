@@ -36,7 +36,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     fi
     export PS1=$'\e[0;94m%n@%m %1~ %# \e[0m'
 else
-    export PS1=$'\e[0;91m%n@%m %1~ %# \e[0m'
+    export PS1=$'\e[0;92m%n@%m %1~ %# \e[0m'
 fi
 
 # Universal aliases / variables
