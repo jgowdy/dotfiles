@@ -37,4 +37,3 @@
       glob: true
       path: mutt/*
       create: true
-
