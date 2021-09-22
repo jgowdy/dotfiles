@@ -13,7 +13,10 @@ bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
 
 source $HOME/.zfunc
 
+# ***
 # Setup EDITOR - Prefer lunarvim
+# ***
+
 if [ -e "$HOME/.local/bin/lvim" ]; then
     export EDITOR="$HOME/.local/bin/lvim"
     alias vim="$EDITOR"
@@ -33,7 +36,7 @@ export GIT_EDITOR="$EDITOR"
 
 # ***
 # Setup prompt / PS1
-#***
+# ***
 
 if [[ "$OSTYPE" == "darwin"* ]]; then    
     # Make macOS prompt blue
@@ -43,17 +46,6 @@ else
     OS_ZSH_PROMPT_COLOR='%F{82}'
 fi
 export PS1="${OS_ZSH_PROMPT_COLOR}%n@%m %1~ %f %# "
-
-
-# Attempt to force the use of arm64 binaries
-#ARCHPREFERENCE="arm64e;arm64;x86_64;i486"
-#if [ `machine` != arm64e ]; then
-#    exec arch -arm64e zsh
-#fi
-
-# Use arch -64 override to fix Homebrew for M1
-#alias brew="arch -64 brew"
-
 
 # If using kitty, setup kitten aliases
 if [[ "$TERM" == "xterm-kitty" ]]; then
@@ -66,8 +58,6 @@ if [[ "$TERM" == "xterm-kitty" ]]; then
     # kitty diff
     alias d="kitty +kitten diff"
 fi
-
-# Universal aliases / variables
 
 # Use Homebrew gnuls if it exists
 if [ -e $HOMEBREW_PREFIX/bin/gls ] ; then
@@ -118,8 +108,10 @@ fi
 alias git-flatten='git reset $(git commit-tree HEAD^{tree} --gpg-sign -m "Flatten")'
 alias fastping="ping -i 0.2"
 alias ports="sudo netstat -ant -p TCP | grep LISTEN"
+
 alias reset-podman="podman machine stop ; sleep 1; podman machine rm ; podman machine init ; podman machine start"
 alias nuke-podman="podman system prune --all --force && podman rmi --all && podman system reset && sudo rm -rf ~/.local/share/containers"
+
 # Get current IPv4 address
 alias checkip="curl https://checkip.amazonaws.com"
 

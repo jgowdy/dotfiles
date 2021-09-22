@@ -1,13 +1,19 @@
 - clean: ['~']
 
 - link:
+    ~/.zprofile: zprofile
+    ~/.zshrc: zshrc
+    ~/.zfunc: zfunc  
     ~/.gitconfig: gitconfig
+    ~/.editorconfig: editorconfig
+    ~/.screenrc: screenrc
+    ~/.gitignore: gitignore
+    ~/.gdbinit: gdbinit
+    ~/.wgetrc: wgetrc
+    ~/.tarsnaprc: tarsnaprc
     ~/.ssh/config:
         path: ssh/config
         create: true
-    ~/.zprofile: zprofile
-    ~/.zshrc: zshrc
-    ~/.zfunc: zfunc
     ~/.config/kitty:
       glob: true
       path: config/kitty/*
@@ -27,13 +33,8 @@
     ~/.nuget/NuGet/NuGet.Config:
       path: NuGet.Config
       create: true
-    ~/.editorconfig: editorconfig
-    ~/.screenrc: screenrc
-    ~/.gitignore: gitignore
-    ~/.gdbinit: gdbinit
-    ~/.wgetrc: wgetrc
     ~/.mutt:
       glob: true
       path: mutt/*
       create: true
-    ~/.tarsnaprc: tarsnaprc
+
