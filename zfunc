@@ -1,0 +1,25 @@
+# Accelerate loading shell environment / init variables
+# $1 name of cache entry  e.g. "rbenv-init"
+# $2 command to generate e.g. "rbenv init -"
+function cached_source() {
+    local cache_file="$HOME/.cache/$1.zsh"
+    # Optimize for cache file existing at the cost of an error message if it doesn't
+    if ! source $cache_file ; then
+        echo "Building $cache_file cache file using $2"
+        if ! eval "$2 > $cache_file" ; then
+            echo "Failed to execute $2"
+            rm $cache_file
+            return -1
+        fi
+        if ! source $cache_file ; then
+            echo "Failed to generate $cache_file using $2"
+            return -1
+        else
+            echo "Successfully generated $cache_file using $2"
+            return 0
+        fi
+    else
+        # Optimal / success path - load existing cache
+        return 0
+    fi
+}

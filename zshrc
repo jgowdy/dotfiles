@@ -11,6 +11,8 @@ export BROWSER='firefox'
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
 
+source $HOME/.zfunc
+
 # Setup EDITOR - Prefer lunarvim
 if [ -e "$HOME/.local/bin/lvim" ]; then
     export EDITOR="$HOME/.local/bin/lvim"

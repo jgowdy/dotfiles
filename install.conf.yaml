@@ -7,6 +7,7 @@
         create: true
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
+    ~/.zfunc: zfunc
     ~/.config/kitty:
       glob: true
       path: config/kitty/*
