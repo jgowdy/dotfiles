@@ -140,6 +140,9 @@ if OS.mac?
   cask "parallels" # For Windows
   brew "dosbox-x"
 
+  # Anti-censorship networks
+  cask "tor-browser"
+
   # Casks that require sudo go last
   cask "dotnet-sdk"
 

@@ -2,6 +2,10 @@ HISTSIZE=1000000000
 SAVEHIST=1000000000
 HISTFILE=~/.zsh_history
 
+setopt append_history # append rather then overwrite
+setopt extended_history # save timestamp
+setopt inc_append_history # add history immediately after typing a command
+
 export CC=gcc
 export LANG=en_US.UTF-8
 export TERMINAL='kitty'
@@ -38,9 +42,9 @@ export GIT_EDITOR="$EDITOR"
 # Setup prompt / PS1
 # ***
 
-if [[ "$OSTYPE" == "darwin"* ]]; then    
+if [[ "$OSTYPE" == "darwin"* ]]; then
     # Make macOS prompt blue
-    OS_ZSH_PROMPT_COLOR='%F{33}'    
+    OS_ZSH_PROMPT_COLOR='%F{33}'
 else
     # Make Ubuntu prompt green
     OS_ZSH_PROMPT_COLOR='%F{82}'
