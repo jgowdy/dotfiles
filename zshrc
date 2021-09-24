@@ -2,7 +2,6 @@ HISTSIZE=1000000000
 SAVEHIST=1000000000
 HISTFILE=~/.zsh_history
 
-setopt append_history # append rather then overwrite
 setopt extended_history # save timestamp
 setopt inc_append_history # add history immediately after typing a command
 
