@@ -1,6 +1,6 @@
 HISTSIZE=1000000000
 SAVEHIST=1000000000
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 
 setopt extended_history # save timestamp
 setopt inc_append_history # add history immediately after typing a command
@@ -11,10 +11,13 @@ export TERMINAL='kitty'
 export GPG_TTY=$(tty)
 export BROWSER='firefox'
 
+source $HOME/.zfunc
+
+cached_source 'machine' "echo MACHINE=$(uname -m)"
+cached_source 'system' "echo SYSTEM=$(uname -s)"
+
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
-
-source $HOME/.zfunc
 
 # ***
 # Setup EDITOR - Prefer lunarvim
@@ -43,12 +46,12 @@ export GIT_EDITOR="$EDITOR"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Make macOS prompt blue
-    OS_ZSH_PROMPT_COLOR='%F{33}'
+    OS_COLOR='%F{33}'
 else
     # Make Ubuntu prompt green
-    OS_ZSH_PROMPT_COLOR='%F{82}'
+    OS_COLOR='%F{82}'
 fi
-export PS1="${OS_ZSH_PROMPT_COLOR}%n@%m %1~ %f %# "
+export PS1="${OS_COLOR}%n%F{255}@${OS_COLOR}%m (%F{226}${MACHINE}%F{255}/%F{226}${SYSTEM}${OS_COLOR}) %1~ %f %# "
 
 # If using kitty, setup kitten aliases
 if [[ "$TERM" == "xterm-kitty" ]]; then
