@@ -1,3 +1,4 @@
+# NOTE: We export all of our variables due to the WSL workaround of `exec zsh` from bash.exe
 export HISTSIZE=1000000000
 export SAVEHIST=1000000000
 export HISTFILE=$HOME/.zsh_history
@@ -11,6 +12,7 @@ export TERMINAL='kitty'
 export GPG_TTY=$(tty)
 export BROWSER='firefox'
 
+# Load zsh functions if not already loaded
 source $HOME/.zfunc
 
 cached_source 'machine' "echo export MACHINE=$(uname -m)"
@@ -70,39 +72,73 @@ if [[ "$TERM" == "xterm-kitty" ]]; then
     alias d="kitty +kitten diff"
 fi
 
-# Use Homebrew gnuls if it exists
-if [ -e $HOMEBREW_PREFIX/bin/gls ] ; then
-    alias ls="$HOMEBREW_PREFIX/bin/gls -laFG --color=auto"
-else
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        # Darwin built in gnuls
-        alias ls="ls -laFG"
+if [ "$HOMEBREW_PREFIX" != "" ]; then
+
+    # Use Homebrew GNU ls if it exists
+    if [ -e $HOMEBREW_PREFIX/bin/gls ] ; then
+        alias ls="$HOMEBREW_PREFIX/bin/gls -laFG --color=auto"
     else
-        # Linux built in gnuls
-        alias ls="ls -laFG --color=auto"
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            # Darwin's built in BSD ls
+            alias ls="ls -laFG"
+        else
+            # Linux built in gnuls
+            alias ls="ls -laFG --color=auto"
+        fi
     fi
+
+    # TODO: Make a function for preferring certain Homebrew coreutils over macOS/BSD
+
+    # Use Homebrew version of GNU grep if it exists
+    if [ -e $HOMEBREW_PREFIX/bin/ggrep ] ; then
+        alias grep="$HOMEBREW_PREFIX/bin/ggrep --color=auto"
+    fi
+
+    # Use Homebrew version of GNU fgrep if it exists
+    if [ -e $HOMEBREW_PREFIX/bin/fgrep ] ; then
+        alias fgrep="$HOMEBREW_PREFIX/bin/gfgrep --color=auto"
+    fi
+
+    # Use Homebrew version of GNU egrep if it exists
+    if [ -e $HOMEBREW_PREFIX/bin/gegrep ] ; then
+        alias egrep="$HOMEBREW_PREFIX/bin/gegrep --color=auto"
+    fi
+
+    # Use Homebrew version of GNU cut if it exists
+    if [ -e $HOMEBREW_PREFIX/bin/gcut ] ; then
+        alias cut="$HOMEBREW_PREFIX/bin/gcut --color=auto"
+    fi
+
+    # Use Homebrew version of GNU sort if it exists
+    if [ -e $HOMEBREW_PREFIX/bin/gsort ] ; then
+        alias sort="$HOMEBREW_PREFIX/bin/gsort --color=auto"
+    fi
+
+    # Use Homebrew version of GNU tar if it exists
+    if [ -e $HOMEBREW_PREFIX/bin/gtar ] ; then
+        alias tar="$HOMEBREW_PREFIX/bin/gtar --color=auto"
+    fi
+
+    # Alias Homebrew neomutt to mutt if it exists
+    if [ -e $HOMEBREW_PREFIX/bin/neomutt ] ; then
+        alias mutt='neomutt'
+    fi
+
+    # Use Homebrew version of openssl binary if it exists
+    if [ -e $HOMEBREW_PREFIX/bin/openssl ]; then
+        alias openssl="$HOMEBREW_PREFIX/bin/openssl"
+
+        # File encrypt and decrypt with -in infile -out outfile
+        alias enc="$HOMEBREW_PREFIX/bin/openssl enc -chacha20 -pbkdf2"
+        alias dec="$HOMEBREW_PREFIX/bin/openssl enc -chacha20 -pbkdf2 -d"
+    fi
+
+    # For interactive shells, enable rbenv, pyenv, and jenv to set variables
+    cached_source 'rbenv-init' "$HOMEBREW_PREFIX/bin/rbenv init -"
+    cached_source 'pyenv-init' "$HOMEBREW_PREFIX/bin/pyenv init -"
+    cached_source 'jenv-init' "$HOMEBREW_PREFIX/bin/jenv init -"
+
 fi
-
-# Use Homebrew version of gnugrep if it exists
-if [ -e $HOMEBREW_PREFIX/bin/ggrep ] ; then
-    alias grep="$HOMEBREW_PREFIX/bin/ggrep --color=auto"
-fi
-
-# Alias Homebrew neomutt to mutt if it exists
-if [ -e $HOMEBREW_PREFIX/bin/neomutt ] ; then
-    alias mutt='neomutt'
-fi
-
-
-# Use Homebrew version of openssl binary if it exists
-if [ -e $HOMEBREW_PREFIX/bin/openssl ]; then
-    alias openssl="$HOMEBREW_PREFIX/bin/openssl"
-
-    # File encrypt and decrypt with -in infile -out outfile
-    alias enc="$HOMEBREW_PREFIX/bin/openssl enc -chacha20 -pbkdf2"
-    alias dec="$HOMEBREW_PREFIX/bin/openssl enc -chacha20 -pbkdf2 -d"
-fi
-
 
 # TODO: If we have podman, BUT we don't have docker, alias podman to docker
 
@@ -131,9 +167,3 @@ alias reset-gpg='gpgconf --kill gpg-agent'
 alias test-gpg='echo “Test” | gpg --clearsign -v'
 
 alias clear-zsh-cache='rm ~/.cache/*.zsh'
-
-
-# For interactive shells, enable rbenv, pyenv, and jenv to set variables
-cached_source 'rbenv-init' "$HOMEBREW_PREFIX/bin/rbenv init -"
-cached_source 'pyenv-init' "$HOMEBREW_PREFIX/bin/pyenv init -"
-cached_source 'jenv-init' "$HOMEBREW_PREFIX/bin/jenv init -"
