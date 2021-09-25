@@ -1,6 +1,6 @@
-HISTSIZE=1000000000
-SAVEHIST=1000000000
-HISTFILE=$HOME/.zsh_history
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+export HISTFILE=$HOME/.zsh_history
 
 setopt extended_history # save timestamp
 setopt inc_append_history # add history immediately after typing a command
@@ -13,9 +13,9 @@ export BROWSER='firefox'
 
 source $HOME/.zfunc
 
-cached_source 'machine' "echo MACHINE=$(uname -m)"
-cached_source 'system' "echo SYSTEM=$(uname -s)"
-cached_source 'wsl' "echo WSL_FLAG=$(grep -q -s -i microsoft /proc/version && echo 1 || echo 0)"
+cached_source 'machine' "echo export MACHINE=$(uname -m)"
+cached_source 'system' "echo export SYSTEM=$(uname -s)"
+cached_source 'wsl' "echo export WSL_FLAG=$(grep -q -s -i microsoft /proc/version && echo 1 || echo 0)"
 
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
@@ -48,7 +48,7 @@ export GIT_EDITOR="$EDITOR"
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Make macOS prompt blue
     OS_COLOR='%F{33}'
-elif [[ "$WSL_FLAG" == "0" ]]; then
+elif [[ "$WSL_FLAG" == "1" ]]; then
     # Make WSL prompt fuchsia
     OS_COLOR='%F{13}'
 else
