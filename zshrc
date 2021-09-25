@@ -15,6 +15,7 @@ source $HOME/.zfunc
 
 cached_source 'machine' "echo MACHINE=$(uname -m)"
 cached_source 'system' "echo SYSTEM=$(uname -s)"
+cached_source 'wsl' "echo WSL_FLAG=$(grep -q -i microsoft /proc/version && echo 1 || echo 0)"
 
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
@@ -47,6 +48,9 @@ export GIT_EDITOR="$EDITOR"
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Make macOS prompt blue
     OS_COLOR='%F{33}'
+elif [[ "$WSL_FLAG" eq "0" ]]; then
+    # Make WSL prompt fuchsia
+    OS_COLOR='%F{13}'
 else
     # Make Ubuntu prompt green
     OS_COLOR='%F{82}'
