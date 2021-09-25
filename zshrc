@@ -33,6 +33,7 @@ if [ -e "$HOME/.local/bin/lvim" ]; then
     alias l="$EDITOR"
 else
     # If lunarvim isn't installed, prefer neovim (use which in case we don't have Homebrew)
+    # TODO: Use cached_source on this which statement?
     if which nvim 2>&1 >/dev/null; then
         export EDITOR="$(which nvim)"
         alias vim="$EDITOR"
