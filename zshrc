@@ -51,7 +51,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$WSL_FLAG" == "1" ]]; then
     # Make WSL prompt fuchsia
     OS_COLOR='%F{13}'
-    export MACHINE='Linux/WSL'
+    export SYSTEM='Linux/WSL'
 else
     # Make Ubuntu prompt green
     OS_COLOR='%F{82}'
