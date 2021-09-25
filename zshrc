@@ -48,7 +48,7 @@ export GIT_EDITOR="$EDITOR"
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Make macOS prompt blue
     OS_COLOR='%F{33}'
-elif [[ "$WSL_FLAG" eq "0" ]]; then
+elif [[ "$WSL_FLAG" == "0" ]]; then
     # Make WSL prompt fuchsia
     OS_COLOR='%F{13}'
 else
