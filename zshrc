@@ -15,7 +15,7 @@ source $HOME/.zfunc
 
 cached_source 'machine' "echo MACHINE=$(uname -m)"
 cached_source 'system' "echo SYSTEM=$(uname -s)"
-cached_source 'wsl' "echo WSL_FLAG=$(grep -q -i microsoft /proc/version && echo 1 || echo 0)"
+cached_source 'wsl' "echo WSL_FLAG=$(grep -q -s -i microsoft /proc/version && echo 1 || echo 0)"
 
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
