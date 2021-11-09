@@ -127,11 +127,17 @@ if [ "$HOMEBREW_PREFIX" != "" ]; then
 
     # Use Homebrew version of openssl binary if it exists
     if [ -e $HOMEBREW_PREFIX/bin/openssl ]; then
-        alias openssl="$HOMEBREW_PREFIX/bin/openssl"
+        OPENSSL_BIN="$HOMEBREW_PREFIX/bin/openssl"
+    elif [ -e $HOMEBREW_PREFIX/opt/openssl/bin/openssl ]; then
+        OPENSSL_BIN="$HOMEBREW_PREFIX/opt/openssl/bin/openssl"
+    fi
+
+    if [ "$OPENSSL_BIN" != "" ]; then
+        alias openssl="$OPENSSL_BIN"
 
         # File encrypt and decrypt with -in infile -out outfile
-        alias enc="$HOMEBREW_PREFIX/bin/openssl enc -chacha20 -pbkdf2"
-        alias dec="$HOMEBREW_PREFIX/bin/openssl enc -chacha20 -pbkdf2 -d"
+        alias enc="$OPENSSL_BIN enc -chacha20 -pbkdf2"
+        alias dec="$OPENSSL_BIN enc -chacha20 -pbkdf2 -d"
     fi
 
     # For interactive shells, enable rbenv, pyenv, and jenv to set variables

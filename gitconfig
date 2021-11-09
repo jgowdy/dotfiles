@@ -11,6 +11,7 @@
 [core]
     autocrlf = input
     preloadIndex = true
+	excludesfile = /Users/jgowdy/.gitignore
 [color]
     ui = auto
 [commit]
