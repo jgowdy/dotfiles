@@ -1,8 +1,45 @@
 IdentityFile ~/.ssh/id_ed25519
 
+Host 35.166.50.82
+  HostName 35.166.50.82
+  User ec2-user
+
 Host bx
-ForwardX11 yes
+  HostName bx.ee
+  #ControlMaster auto
+  #ControlPath ~/.ssh/%r@%h:%p.sock
+  #ControlPersist yes
+  ForwardX11 yes
+  ForwardAgent yes
+  #LocalForward 3389 10.0.0.2:3389
+  #LocalForward 59001 10.0.0.3:5900
+  #LocalForward 32830 10.0.0.3:3283
+  Port 8421
+  Compression yes
 
-Host mac
-User jsmith
+Host bx.ee
+  ForwardX11 yes
+  #ControlMaster auto
+  #ControlPath ~/.ssh/%r@%h:%p.sock
+  #ControlPersist yes
+  #LocalForward 3389 10.0.0.2:3389
+  #LocalForward 59001 10.0.0.3:5900
+  #LocalForward 32830 10.0.0.3:3283
+  Port 8421
+  Compression yes
 
+Host trigger.freedomvoice.com
+  ProxyCommand=nc -X 5 -x 192.168.4.47:12345 %h %p
+
+Host *.gdg
+  ProxyCommand=nc -X 5 -x 192.168.4.47:12345 %h %p
+
+Host i-* mi-*
+  ProxyCommand sh -c "aws ssm start-session --profile vnm --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+
+Host 192.168.4.47
+  ControlMaster auto
+  ControlPath ~/.ssh/%r@%h:%p.sock
+  ControlPersist yes
+  LocalForward 33890 10.22.187.163:3389
+  LocalForward 2220 10.22.187.167:22

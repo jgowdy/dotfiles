@@ -5,6 +5,7 @@ export HISTFILE=$HOME/.zsh_history
 
 setopt extended_history # save timestamp
 setopt inc_append_history # add history immediately after typing a command
+setopt autopushd
 
 export CC=gcc
 export LANG=en_US.UTF-8
@@ -21,6 +22,7 @@ cached_source 'wsl' "echo export WSL_FLAG=$(grep -q -s -i microsoft /proc/versio
 
 bindkey '^[[1;5C' forward-word # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
+bindkey '^R' history-incremental-search-backward
 
 # ***
 # Setup EDITOR - Prefer lunarvim
@@ -107,7 +109,7 @@ if [ "$HOMEBREW_PREFIX" != "" ]; then
 
     # Use Homebrew version of GNU cut if it exists
     if [ -e $HOMEBREW_PREFIX/bin/gcut ] ; then
-        alias cut="$HOMEBREW_PREFIX/bin/gcut --color=auto"
+        alias cut="$HOMEBREW_PREFIX/bin/gcut"
     fi
 
     # Use Homebrew version of GNU sort if it exists
@@ -179,3 +181,6 @@ alias clear-zsh-cache='rm ~/.cache/*.zsh'
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+export PATH="/usr/local/opt/llvm/bin:$PATH"

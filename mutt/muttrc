@@ -1,9 +1,10 @@
-set imap_user="jeremiah@gowdy.me"
+set imap_user = "jgowdy"
+set ssl_starttls = yes
 set ssl_force_tls = yes
 set from = "jeremiah@gowdy.me"
 set realname = "Jeremiah Gowdy"
-set smtp_url = "smtps://jeremiah@gowdy.me@smtp.gmail.com:465"
-set folder = "imaps://imap.gmail.com/"
+set smtp_url = "smtp://jgowdy@smtp.mail.me.com:587"
+set folder = "imaps://imap.mail.me.com/"
 set spoolfile = "+INBOX"
 set postponed = "+[Gmail]/Drafts"
 #set record = "+[Gmail]/Sent Mail"
