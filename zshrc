@@ -129,9 +129,18 @@ if [ "$HOMEBREW_PREFIX" != "" ]; then
 
     # Use Homebrew version of openssl binary if it exists
     if [ -e $HOMEBREW_PREFIX/bin/openssl ]; then
-        OPENSSL_BIN="$HOMEBREW_PREFIX/bin/openssl"
+	OPENSSL_BIN="$HOMEBREW_PREFIX/bin/openssl"
+	alias openssl="${OPENSSL_BIN}"
+
+        # File encrypt and decrypt with -in infile -out outfile
+        alias enc="${OPENSSL_BIN} enc -chacha20 -pbkdf2"
+        alias dec="${OPENSSL_BIN} enc -chacha20 -pbkdf2 -d"
     elif [ -e $HOMEBREW_PREFIX/opt/openssl/bin/openssl ]; then
-        OPENSSL_BIN="$HOMEBREW_PREFIX/opt/openssl/bin/openssl"
+	OPENSSL_BIN="$HOMEBREW_PREFIX/opt/openssl/bin/openssl"
+	alias openssl="${OPENSSL_BIN}"
+
+	alias enc="${OPENSSL_BIN} enc -chacha20 -pbkdf2"
+	alias dec="${OPENSSL_BIN} enc -chacha20 -pbkdf2 -d"
     fi
 
     if [ "$OPENSSL_BIN" != "" ]; then
@@ -171,10 +180,6 @@ alias test-gpg='echo “Test” | gpg --clearsign -v'
 
 alias clear-zsh-cache='rm ~/.cache/*.zsh'
 
- export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"

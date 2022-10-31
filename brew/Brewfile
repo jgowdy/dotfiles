@@ -126,28 +126,17 @@ if OS.mac?
   cask "keka"
   cask "microsoft-remote-desktop"
 
-  #cask "trezor-suite"
-
-  # Gaming
-#  cask "0-ad"
-  cask "epic-games"
-  cask "steam"
-  cask "battle-net"
-  cask "minecraft"
-  cask "openra"
-
-  # Virtualization / Emulation
-  #cask "crossover"
-  #cask "parallels" # For Windows
-  brew "dosbox-x"
-  #brew "docker-machine"
-  #brew "docker-machine-parallels"
-
-  # Anti-censorship networks
-  #cask "tor-browser"
-
-  # Casks that require sudo go last
-  #cask "dotnet-sdk"
+  if(File.exist?('gaming.txt'))
+    # Gaming
+    cask "0-ad"
+    cask "epic-games"
+    cask "steam"
+    cask "battle-net"
+    cask "minecraft"
+    cask "openra"
+    brew "dosbox-x"
+    brew "crossover"
+  end
 
 end
 
