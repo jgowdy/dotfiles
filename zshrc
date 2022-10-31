@@ -141,12 +141,6 @@ if [ "$HOMEBREW_PREFIX" != "" ]; then
         alias enc="$OPENSSL_BIN enc -chacha20 -pbkdf2"
         alias dec="$OPENSSL_BIN enc -chacha20 -pbkdf2 -d"
     fi
-
-    # For interactive shells, enable rbenv, pyenv, and jenv to set variables
-    cached_source 'rbenv-init' "$HOMEBREW_PREFIX/bin/rbenv init -"
-    cached_source 'pyenv-init' "$HOMEBREW_PREFIX/bin/pyenv init -"
-    cached_source 'jenv-init' "$HOMEBREW_PREFIX/bin/jenv init -"
-
 fi
 
 # TODO: If we have podman, BUT we don't have docker, alias podman to docker
