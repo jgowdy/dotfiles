@@ -130,17 +130,8 @@ if [ "$HOMEBREW_PREFIX" != "" ]; then
     # Use Homebrew version of openssl binary if it exists
     if [ -e $HOMEBREW_PREFIX/bin/openssl ]; then
 	OPENSSL_BIN="$HOMEBREW_PREFIX/bin/openssl"
-	alias openssl="${OPENSSL_BIN}"
-
-        # File encrypt and decrypt with -in infile -out outfile
-        alias enc="${OPENSSL_BIN} enc -chacha20 -pbkdf2"
-        alias dec="${OPENSSL_BIN} enc -chacha20 -pbkdf2 -d"
     elif [ -e $HOMEBREW_PREFIX/opt/openssl/bin/openssl ]; then
 	OPENSSL_BIN="$HOMEBREW_PREFIX/opt/openssl/bin/openssl"
-	alias openssl="${OPENSSL_BIN}"
-
-	alias enc="${OPENSSL_BIN} enc -chacha20 -pbkdf2"
-	alias dec="${OPENSSL_BIN} enc -chacha20 -pbkdf2 -d"
     fi
 
     if [ "$OPENSSL_BIN" != "" ]; then
@@ -178,8 +169,11 @@ alias checkip="curl https://checkip.amazonaws.com"
 alias reset-gpg='gpgconf --kill gpg-agent'
 alias test-gpg='echo “Test” | gpg --clearsign -v'
 
-alias clear-zsh-cache='rm ~/.cache/*.zsh'
+export PATH="$HOMEBREW_PREFIX/opt/mysql-client/bin:$PATH"
+export PATH="/home/jgowdy/go/bin:$PATH"
+export PATH="/home/jgowdy/scripts:$PATH"
 
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+export HOMEBREW_TEMP=~/tmp
+
+. $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
+
