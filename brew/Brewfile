@@ -84,15 +84,10 @@ if OS.mac?
   tap "homebrew/services"
 
   # Development tools
-  cask "android-studio"
-  cask "intellij-idea"
   cask "visual-studio-code"
-  cask "goland"
-  cask "rider"
   cask "sublime-text"
   cask "drawio"
-  #cask "wireshark"
-  cask "ngrok"
+  cask "wireshark"
 
   # Terminal tools
   cask "font-hack-nerd-font"
@@ -109,51 +104,36 @@ if OS.mac?
   cask "zoom"
 
   # Browsers
-  cask "eloston-chromium", no_quarantine: true
+  cask "brave-browser", no_quarantine: true
   cask "firefox"
 
   # Cloud services
   cask "mullvadvpn"
-  cask "amazon-photos"
-  cask "dropbox"
   cask "backblaze"
-  cask "cloudapp"
 
   # Utilities
-  cask "cakebrew"
   cask "coconutbattery"
   cask "macupdater"
   cask "keka"
   cask "microsoft-remote-desktop"
 
-  if(File.exist?('gaming.txt'))
-    # Gaming
-    cask "0-ad"
-    cask "epic-games"
-    cask "steam"
-    cask "battle-net"
-    cask "minecraft"
-    cask "openra"
-    brew "dosbox-x"
-    brew "crossover"
-  end
+  #cask "trezor-suite"
+
+  # Gaming
+  cask "steam"
+  cask "battle-net"
+
+  # Virtualization / Emulation
+  cask "crossover"
+  cask "parallels" # For Windows
+  brew "dosbox-x"
 
 end
-
-# Need different podman for Apple M1
-#if OS.mac? && Hardware::CPU.physical_cpu_arm64?
-  #tap "simnalamburt/x"
-  #brew "simnalamburt/x/podman-apple-silicon"
-#else
-  brew "podman"
-#end
 
 if OS.mac?
   brew "mas"
   mas "PCalc", id: 403504866
-  mas "Pocket", id: 568494494
   mas "Amphetamine", id: 937984704
-  #mas "Xcode", id: 497799835
   mas "Remote Desktop", id: 409907375
   mas "Microsoft To Do", id: 1274495053
 end

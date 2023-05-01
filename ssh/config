@@ -1,4 +1,6 @@
-IdentityFile ~/.ssh/id_ed25519
+Include ~/.orbstack/ssh/config
+
+#IdentityFile ~/.ssh/id_ed25519
 
 Host 35.166.50.82
   HostName 35.166.50.82
@@ -25,6 +27,13 @@ Host bx.ee
   #LocalForward 3389 10.0.0.2:3389
   #LocalForward 59001 10.0.0.3:5900
   #LocalForward 32830 10.0.0.3:3283
+  Port 8421
+  Compression yes
+
+Host ts.bx.ee
+  HostName bx.ee
+  ForwardX11 yes
+  ForwardAgent yes
   Port 8421
   Compression yes
 

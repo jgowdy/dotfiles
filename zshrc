@@ -114,12 +114,12 @@ if [ "$HOMEBREW_PREFIX" != "" ]; then
 
     # Use Homebrew version of GNU sort if it exists
     if [ -e $HOMEBREW_PREFIX/bin/gsort ] ; then
-        alias sort="$HOMEBREW_PREFIX/bin/gsort --color=auto"
+        alias sort="$HOMEBREW_PREFIX/bin/gsort"
     fi
 
     # Use Homebrew version of GNU tar if it exists
     if [ -e $HOMEBREW_PREFIX/bin/gtar ] ; then
-        alias tar="$HOMEBREW_PREFIX/bin/gtar --color=auto"
+        alias tar="$HOMEBREW_PREFIX/bin/gtar"
     fi
 
     # Alias Homebrew neomutt to mutt if it exists
@@ -143,14 +143,6 @@ if [ "$HOMEBREW_PREFIX" != "" ]; then
     fi
 fi
 
-# TODO: If we have podman, BUT we don't have docker, alias podman to docker
-
-# We always use podman if it exists
-#if which podman 2>&1 >/dev/null; then
-#    alias docker=podman
-#fi
-
-
 # ***
 # Custom aliases / helpers (use alias to show list of aliases)
 # ***
@@ -158,9 +150,6 @@ fi
 alias git-flatten='git reset $(git commit-tree HEAD^{tree} --gpg-sign -m "Flatten")'
 alias fastping="ping -i 0.2"
 alias ports="sudo netstat -ant -p TCP | grep LISTEN"
-
-alias reset-podman="podman machine stop ; sleep 1; podman machine rm ; podman machine init ; podman machine start"
-alias nuke-podman="podman system prune --all --force && podman rmi --all && podman system reset && sudo rm -rf ~/.local/share/containers"
 
 # Get current IPv4 address
 alias checkip="curl https://checkip.amazonaws.com"
@@ -177,3 +166,12 @@ export HOMEBREW_TEMP=~/tmp
 
 . $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
 
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+autoload -U +X compinit && compinit
+autoload bashcompinit
+bashcompinit
+
+. /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+
+source /Users/jgowdy/.config/op/plugins.sh
