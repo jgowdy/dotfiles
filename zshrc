@@ -172,7 +172,7 @@ autoload -U +X compinit && compinit
 autoload bashcompinit
 bashcompinit
 
-. /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+. $HOMEBREW_PREFIX/opt/asdf/etc/bash_completion.d/asdf.bash
 
 if [ -e "$HOME/.config/op/plugins.sh" ]; then
     source "$HOME/.config/op/plugins.sh"
