@@ -4,12 +4,14 @@
 source $HOME/.zfunc
 
 # Load Homebrew shellenv
-if ! cached_source 'homebrew-shellenv' '/opt/homebrew/bin/brew shellenv' ; then
-    if ! cached_source 'homebrew-shellenv' '/home/linuxbrew/.linuxbrew/bin/brew shellenv' ; then
-        if ! cached_source 'homebrew-shellenv' '/usr/local/bin/brew shellenv' ; then
-            echo "Homebrew not installed touch $HOME/.cache/homebrew-shellenv.zsh to cache empty results"
-        fi
-    fi
+if [ -e $HOME/.cache ] ; then
+  if ! cached_source 'homebrew-shellenv' '/opt/homebrew/bin/brew shellenv' ; then
+      if ! cached_source 'homebrew-shellenv' '/home/linuxbrew/.linuxbrew/bin/brew shellenv' ; then
+          if ! cached_source 'homebrew-shellenv' '/usr/local/bin/brew shellenv' ; then
+              echo "Homebrew not installed touch $HOME/.cache/homebrew-shellenv.zsh to cache empty results"
+          fi
+      fi
+  fi
 fi
 
 # Prepend private ~/bin to PATH
