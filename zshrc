@@ -159,8 +159,8 @@ alias reset-gpg='gpgconf --kill gpg-agent'
 alias test-gpg='echo “Test” | gpg --clearsign -v'
 
 export PATH="$HOMEBREW_PREFIX/opt/mysql-client/bin:$PATH"
-export PATH="/home/jgowdy/go/bin:$PATH"
-export PATH="/home/jgowdy/scripts:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/scripts:$PATH"
 
 export HOMEBREW_TEMP=~/tmp
 
@@ -174,4 +174,6 @@ bashcompinit
 
 . /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
 
-source /Users/jgowdy/.config/op/plugins.sh
+if [ -e "$HOME/.config/op/plugins.sh" ]; then
+    source "$HOME/.config/op/plugins.sh"
+fi
