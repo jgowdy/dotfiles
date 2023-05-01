@@ -75,8 +75,7 @@ if [[ "$TERM" == "xterm-kitty" ]]; then
     alias d="kitty +kitten diff"
 fi
 
-if [ "$HOMEBREW_PREFIX" != "" ]; then
-
+if [[ "$HOMEBREW_PREFIX" != "" && -e "$HOMEBREW_PREFIX" ]]; then
     # Use Homebrew GNU ls if it exists
     if [ -e $HOMEBREW_PREFIX/bin/gls ] ; then
         alias ls="$HOMEBREW_PREFIX/bin/gls -laFG --color=auto"
@@ -141,6 +140,15 @@ if [ "$HOMEBREW_PREFIX" != "" ]; then
         alias enc="$OPENSSL_BIN enc -chacha20 -pbkdf2"
         alias dec="$OPENSSL_BIN enc -chacha20 -pbkdf2 -d"
     fi
+
+    export HOMEBREW_TEMP=~/tmp
+    source $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
+    autoload -U +X compinit && compinit
+    autoload bashcompinit
+    bashcompinit
+    source $HOMEBREW_PREFIX/opt/asdf/etc/bash_completion.d/asdf.bash
+
+    export PATH="$HOMEBREW_PREFIX/opt/mysql-client/bin:$PATH"
 fi
 
 # ***
@@ -158,21 +166,10 @@ alias checkip="curl https://checkip.amazonaws.com"
 alias reset-gpg='gpgconf --kill gpg-agent'
 alias test-gpg='echo “Test” | gpg --clearsign -v'
 
-export PATH="$HOMEBREW_PREFIX/opt/mysql-client/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/scripts:$PATH"
 
-export HOMEBREW_TEMP=~/tmp
-
-. $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
-
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-
-autoload -U +X compinit && compinit
-autoload bashcompinit
-bashcompinit
-
-. $HOMEBREW_PREFIX/opt/asdf/etc/bash_completion.d/asdf.bash
 
 if [ -e "$HOME/.config/op/plugins.sh" ]; then
     source "$HOME/.config/op/plugins.sh"
