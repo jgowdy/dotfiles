@@ -7,11 +7,18 @@ setopt extended_history # save timestamp
 setopt inc_append_history # add history immediately after typing a command
 setopt autopushd
 
+export TMPDIR=$HOME/.tmp/
+export TEMP=$HOME/.tmp/
+export TEMPDIR=$HOME/.tmp/
+export TMP=$HOME/.tmp/
+
 export CC=gcc
 export LANG=en_US.UTF-8
-export TERMINAL='kitty'
+export TERMINAL='xterm-256color'
 export GPG_TTY=$(tty)
 export BROWSER='firefox'
+
+export XAUTHORITY=$HOME/.Xauthority
 
 # Load zsh functions if not already loaded
 source $HOME/.zfunc
@@ -78,14 +85,14 @@ fi
 if [[ "$HOMEBREW_PREFIX" != "" && -e "$HOMEBREW_PREFIX" ]]; then
     # Use Homebrew GNU ls if it exists
     if [ -e $HOMEBREW_PREFIX/bin/gls ] ; then
-        alias ls="$HOMEBREW_PREFIX/bin/gls -laFG --color=auto"
+        alias ls="$HOMEBREW_PREFIX/bin/gls -lFG --color=auto"
     else
         if [[ "$OSTYPE" == "darwin"* ]]; then
             # Darwin's built in BSD ls
-            alias ls="ls -laFG"
+            alias ls="ls -lFG"
         else
             # Linux built in gnuls
-            alias ls="ls -laFG --color=auto"
+            alias ls="ls -lFG --color=auto"
         fi
     fi
 
@@ -141,7 +148,7 @@ if [[ "$HOMEBREW_PREFIX" != "" && -e "$HOMEBREW_PREFIX" ]]; then
         alias dec="$OPENSSL_BIN enc -chacha20 -pbkdf2 -d"
     fi
 
-    export HOMEBREW_TEMP=~/tmp
+    export HOMEBREW_TEMP=$HOME/.tmp
     source $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
     autoload -U +X compinit && compinit
     autoload bashcompinit
@@ -166,6 +173,37 @@ alias checkip="curl https://checkip.amazonaws.com"
 alias reset-gpg='gpgconf --kill gpg-agent'
 alias test-gpg='echo “Test” | gpg --clearsign -v'
 
+pushd()
+{
+  if [ $# -eq 0 ]; then
+    DIR="${HOME}"
+  else
+    DIR="$1"
+  fi
+
+  builtin pushd "${DIR}" > /dev/null
+  echo -n "DIRSTACK: "
+  dirs
+}
+
+pushd_builtin()
+{
+  builtin pushd > /dev/null
+  echo -n "DIRSTACK: "
+  dirs
+}
+
+popd()
+{
+  builtin popd > /dev/null
+  echo -n "DIRSTACK: "
+  dirs
+}
+
+alias cd='pushd'
+alias back='popd'
+alias flip='pushd_builtin'
+
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/scripts:$PATH"
 
@@ -174,3 +212,9 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 if [ -e "$HOME/.config/op/plugins.sh" ]; then
     source "$HOME/.config/op/plugins.sh"
 fi
+
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
