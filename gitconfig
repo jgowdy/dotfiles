@@ -1,7 +1,7 @@
 [user]
     name = Jeremiah Gowdy
     email = jeremiah@gowdy.me
-    signingkey = 4F2FF80BF95DEC07
+    signingkey = 89A91D5D761C30A6A711F9CF4F2FF80BF95DEC07
 [pull]
     rebase = true
 [push]
@@ -11,11 +11,13 @@
 [core]
     autocrlf = input
     preloadIndex = true
-	excludesfile = /Users/jgowdy/.gitignore
+    excludesfile = /Users/jgowdy/.gitignore
+    sshCommand = "ssh -i ~/.ssh/id_ed25519-personal"
+
 [color]
     ui = auto
 [commit]
-    gpgsign = true
+	gpgsign = true
 [diff]
     tool = kitty
     guitool = kitty.gui
@@ -35,3 +37,10 @@
 	required = true
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+#[gpg "ssh"]
+#	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[apply]
+	whitespace = fix
+
+[includeIf "gitdir:~/projects/godaddy/"]
+	path = ~/projects/godaddy/.gitconfig
