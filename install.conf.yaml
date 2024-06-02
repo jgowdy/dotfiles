@@ -30,9 +30,6 @@
     ~/.irssi/config:
       path: irssi/config
       create: true
-    ~/.nuget/NuGet/NuGet.Config:
-      path: NuGet.Config
-      create: true
     ~/.mutt:
       glob: true
       path: mutt/*
