@@ -11,9 +11,6 @@
     ~/.gdbinit: gdbinit
     ~/.wgetrc: wgetrc
     ~/.tarsnaprc: tarsnaprc
-    ~/.ssh/config:
-        path: ssh/config
-        create: true
     ~/.config/kitty:
       glob: true
       path: config/kitty/*
@@ -21,14 +18,8 @@
     ~/.config/containers/registries.conf:
       path: config/containers/registries.conf
       create: true
-    ~/.config/systemd/user/dropbox.service:
-      path: config/systemd/user/dropbox.service
-      create: true
     ~/.config/lvim/config.lua:
       path: lvim/config.lua
-      create: true
-    ~/.irssi/config:
-      path: irssi/config
       create: true
     ~/.mutt:
       glob: true
