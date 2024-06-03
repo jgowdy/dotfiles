@@ -7,18 +7,18 @@ setopt extended_history # save timestamp
 setopt inc_append_history # add history immediately after typing a command
 setopt autopushd
 
-export TMPDIR=$HOME/.tmp/
-export TEMP=$HOME/.tmp/
-export TEMPDIR=$HOME/.tmp/
-export TMP=$HOME/.tmp/
+if [[ -d "$HOME/.tmp/" ]]; then
+	export TMPDIR=$HOME/.tmp/
+	export TEMP=$HOME/.tmp/
+	export TEMPDIR=$HOME/.tmp/
+	export TMP=$HOME/.tmp/
+fi
 
 export CC=gcc
 export LANG=en_US.UTF-8
 export TERMINAL='xterm-256color'
 export GPG_TTY=$(tty)
 export BROWSER='firefox'
-
-export XAUTHORITY=$HOME/.Xauthority
 
 # Load zsh functions if not already loaded
 source $HOME/.zfunc
@@ -268,3 +268,6 @@ fi
 
 # Ensure that Homebrew Cask apps are not quarantined
 export HOMEBREW_CASK_OPTS=--no-quarantine
+
+export XAUTHORITY=$HOME/.Xauthority
+export DISPLAY=:0
