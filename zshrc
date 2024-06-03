@@ -269,5 +269,6 @@ fi
 # Ensure that Homebrew Cask apps are not quarantined
 export HOMEBREW_CASK_OPTS=--no-quarantine
 
+export XDG_CONFIG_HOME="$HOME/.config"
 export XAUTHORITY=$HOME/.Xauthority
 export DISPLAY=:0
