@@ -1,6 +1,3 @@
-# For debugging zsh slowness
-#set -x
-
 source $HOME/.zfunc
 
 # Load Homebrew shellenv
@@ -14,11 +11,6 @@ if [ -e $HOME/.cache ] ; then
   fi
 fi
 
-# Prepend private ~/bin to PATH
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
 # Prepend private ~/.local/bin to PATH
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
@@ -29,22 +21,20 @@ if [ -d "/usr/local/go/bin" ] ; then
     PATH="/usr/local/go/bin:$PATH"
 fi
 
-##
-# Your previous /Users/jgowdy/.zprofile file was backed up as /Users/jgowdy/.zprofile.macports-saved_2022-02-03_at_18:37:59
-##
-
-# MacPorts Installer addition on 2022-02-03_at_18:37:59: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-
-# MacPorts Installer addition on 2022-02-03_at_18:37:59: adding an appropriate MANPATH variable for use with MacPorts.
-export MANPATH="/opt/local/share/man:$MANPATH"
-# Finished adapting your MANPATH environment variable for use with MacPorts.
+# ****************************************************************************************************
+# Set telemetry opt-outs
+# ****************************************************************************************************
 
 export HOMEBREW_NO_ANALYTICS=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export POWERSHELL_TELEMETRY_OPTOUT=1
-
-# Added by OrbStack: command-line tools and integration
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+export NPM_CONFIG_TELEMETRY=0
+export DISABLE_NPM_USAGE_METRICS=1
+export VSCODE_TELEMETRY_OPTOUT=true
+export GOOGLE_ANALYTICS_DISABLED=true
+export SENTRY_DISABLED=true
+export AWS_TELEMETRY_OPT_OUT=true
+export JEKYLL_NO_USAGE=true
+export SKIP_TELEMETRY=true
+export NO_UPDATE_NOTIFIER=true
+export TELEMETRY_DISABLED=true

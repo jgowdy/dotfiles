@@ -1,7 +1,6 @@
 # ****************************************************************************************************
 # Attempt to handle errors during .zshrc via exit 0
 # ****************************************************************************************************
-
 error_handler() {
     echo "An error occurred in .zshrc"
     exit 0
@@ -24,6 +23,24 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XAUTHORITY="$HOME/.Xauthority"
 export DISPLAY=:0
 export TZ='America/Los_Angeles'
+
+# ****************************************************************************************************
+# Set telemetry opt-outs
+# ****************************************************************************************************
+
+export HOMEBREW_NO_ANALYTICS=1
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export POWERSHELL_TELEMETRY_OPTOUT=1
+export NPM_CONFIG_TELEMETRY=0
+export DISABLE_NPM_USAGE_METRICS=1
+export VSCODE_TELEMETRY_OPTOUT=true
+export GOOGLE_ANALYTICS_DISABLED=true
+export SENTRY_DISABLED=true
+export AWS_TELEMETRY_OPT_OUT=true
+export JEKYLL_NO_USAGE=true
+export SKIP_TELEMETRY=true
+export NO_UPDATE_NOTIFIER=true
+export TELEMETRY_DISABLED=true
 
 # ****************************************************************************************************
 # Set zsh options
@@ -105,9 +122,9 @@ alias flip='pushd_builtin'
 # ****************************************************************************************************
 
 # Use cached_source function to cache machine type flags for prompt / PS1
-cached_source 'machine' "echo export MACHINE=$(uname -m)"
-cached_source 'system' "echo export SYSTEM=$(uname -s)"
-cached_source 'wsl' "echo export WSL_FLAG=$(grep -q -s -i microsoft /proc/version && echo 1 || echo 0)"
+cached_source 'machine' "echo export MACHINE=\$(uname -m)"
+cached_source 'system' "echo export SYSTEM=\$(uname -s)"
+cached_source 'wsl' "echo export WSL_FLAG=\$(grep -q -s -i microsoft /proc/version && echo 1 || echo 0)"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Make macOS prompt blue
@@ -285,7 +302,7 @@ fi
 
 # If we have a neofetch output to display, display it
 if [ -e "$HOME/.config/neofetch.txt" ]; then
-    cat $HOME/.config/neofetch.txt
+    echo "$( <$HOME/.config/neofetch.txt)"
 fi
 
 # ****************************************************************************************************
