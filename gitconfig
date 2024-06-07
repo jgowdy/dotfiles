@@ -13,6 +13,8 @@
     preloadIndex = true
     excludesfile = /Users/jgowdy/.gitignore
     sshCommand = "ssh -i ~/.ssh/id_ed25519-personal"
+    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+    untrackedCache = true
 
 [color]
     ui = auto
