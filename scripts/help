@@ -35,8 +35,8 @@ print_section "$(echo "source ~/.zshrc >/dev/null 2>&1; alias" | zsh)" "Aliases 
 test -d ~/.scripts && print_section "$(find ~/.scripts -type f -executable -o -type l -executable)" "Scripts available in ~/.scripts"
 test -d ~/.local/bin && print_section "$(find ~/.local/bin -type f -executable -o -type l -executable)" "~/.local/bin"
 test -d /snap/bin && print_section "$(find /snap/bin -type f -executable -o -type l -executable)" "/snap/bin"
-print_section "$(npm list -g --depth=0)" "npm/npx commands"
-print_section "$(pipx list)" "pipx commands"
+test -x "$(command -v npm)" && print_section "$(npm list -g --depth=0)" "npm/npx commands"
+test -x "$(command -v pipx)" && print_section "$(pipx list)" "pipx commands"
 if [[ "$show_all" == true ]]; then
     test -d "$HOMEBREW_PREFIX/bin" && print_section "$(find $HOMEBREW_PREFIX/bin -type f -executable -o -type l -executable)" "$HOMEBREW_PREFIX/bin"
     test -d "/usr/local/bin" && print_section "$(find /usr/local/bin -type f -executable -o -type l -executable)" "/usr/local/bin"
