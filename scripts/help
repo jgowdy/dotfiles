@@ -30,28 +30,15 @@ while getopts "a" opt; do
   esac
 done
 
-# Getting aliases
-alias_output=$(echo "source ~/.zshrc >/dev/null 2>&1; alias" | zsh)
-
-# Finding executable files in ~/scripts
-scripts_output=$(find ~/scripts -type f -executable -o -type l -executable)
-
-# Finding executable files in /usr/local/bin
-usr_local_bin_output=$(find /usr/local/bin -type f -executable -o -type l -executable)
-
-dot_local_bin_output=$(find ~/.local/bin -type f -executable -o -type l -executable)
-
+# Print sections with inline commands
+print_section "$(echo "source ~/.zshrc >/dev/null 2>&1; alias" | zsh)" "Aliases configured"
+test -d ~/.scripts && print_section "$(find ~/.scripts -type f -executable -o -type l -executable)" "Scripts available in ~/.scripts"
+test -d ~/.local/bin && print_section "$(find ~/.local/bin -type f -executable -o -type l -executable)" "~/.local/bin"
+test -d /snap/bin && print_section "$(find /snap/bin -type f -executable -o -type l -executable)" "/snap/bin"
+print_section "$(npm list -g --depth=0)" "npm/npx commands"
+print_section "$(pipx list)" "pipx commands"
 if [[ "$show_all" == true ]]; then
-  homebrew_bin_output=$(find /opt/homebrew/bin -type f -executable -o -type l -executable)
-fi
-
-# Print sections based on content availability
-print_section "$alias_output" "Aliases configured"
-print_section "$scripts_output" "Scripts available in ~/scripts"
-print_section "$usr_local_bin_output" "/usr/local/bin"
-print_section "$dot_local_bin_output" "~/.local/bin"
-
-if [[ "$show_all" == true ]]; then
-  print_section "$homebrew_bin_output" "/opt/homebrew/bin"
+    test -d "$HOMEBREW_PREFIX/bin" && print_section "$(find $HOMEBREW_PREFIX/bin -type f -executable -o -type l -executable)" "$HOMEBREW_PREFIX/bin"
+    test -d "/usr/local/bin" && print_section "$(find /usr/local/bin -type f -executable -o -type l -executable)" "/usr/local/bin"
 fi
 
