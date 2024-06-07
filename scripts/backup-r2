@@ -1,0 +1,4 @@
+#!/bin/sh
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+source ~/.ssh/restic-r2-env
+source "${SCRIPT_DIR}/backup-restic"

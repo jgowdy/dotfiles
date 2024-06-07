@@ -1,0 +1,1 @@
+restic backup --compression max --cleanup-cache --password-file ~/.ssh/restic-password --one-file-system -v ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/ ~/Documents 

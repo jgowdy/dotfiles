@@ -1,0 +1,4 @@
+#!/bin/sh
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+export RESTIC_REPOSITORY="sftp:jgowdy@bx.ee:/storage/restic"
+source "${SCRIPT_DIR}/backup-restic"

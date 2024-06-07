@@ -1,0 +1,57 @@
+#!/bin/zsh
+
+# Function to print a section if the content is not empty
+print_section() {
+    local content="$1"
+    local header="$2"
+
+    if [[ -n "$content" ]]; then
+        echo "-------------------------------"
+        echo -e "\e[1m$header\e[0m"
+        echo "-------------------------------"
+        echo
+        echo "$content"
+        echo
+    fi
+}
+
+# Initialize flag for showing all sections
+show_all=false
+
+# Parse options
+while getopts "a" opt; do
+  case $opt in
+    a)
+      show_all=true
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+done
+
+# Getting aliases
+alias_output=$(echo "source ~/.zshrc >/dev/null 2>&1; alias" | zsh)
+
+# Finding executable files in ~/scripts
+scripts_output=$(find ~/scripts -type f -executable -o -type l -executable)
+
+# Finding executable files in /usr/local/bin
+usr_local_bin_output=$(find /usr/local/bin -type f -executable -o -type l -executable)
+
+dot_local_bin_output=$(find ~/.local/bin -type f -executable -o -type l -executable)
+
+if [[ "$show_all" == true ]]; then
+  homebrew_bin_output=$(find /opt/homebrew/bin -type f -executable -o -type l -executable)
+fi
+
+# Print sections based on content availability
+print_section "$alias_output" "Aliases configured"
+print_section "$scripts_output" "Scripts available in ~/scripts"
+print_section "$usr_local_bin_output" "/usr/local/bin"
+print_section "$dot_local_bin_output" "~/.local/bin"
+
+if [[ "$show_all" == true ]]; then
+  print_section "$homebrew_bin_output" "/opt/homebrew/bin"
+fi
+
