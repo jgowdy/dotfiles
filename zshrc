@@ -201,8 +201,8 @@ fi
 # ****************************************************************************************************
 
 # Optimize for neovim Homebrew existing
-if [ -e /opt/homebrew/bin/nvim ]; then
-    export EDITOR="/opt/homebrew/bin/nvim"
+if [ -e $HOMEBREW_PREFIX/bin/nvim ]; then
+    export EDITOR="$HOMEBREW_PREFIX/bin/nvim"
 else
     # Prefer neovim if it exists
     nvim_path=$(command -v nvim 2>/dev/null)
