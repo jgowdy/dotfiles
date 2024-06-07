@@ -3,7 +3,7 @@
 - link:
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
-    ~/.zfunc: zfunc  
+    ~/.zfunc: zfunc
     ~/.gitconfig: gitconfig
     ~/.editorconfig: editorconfig
     ~/.screenrc: screenrc
@@ -24,4 +24,8 @@
     ~/.mutt:
       glob: true
       path: mutt/*
+      create: true
+    ~/.scripts:
+      glob: true
+      path: scripts/*
       create: true

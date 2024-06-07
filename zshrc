@@ -248,7 +248,7 @@ fi
 # Add custom scripts to the PATH
 # ****************************************************************************************************
 
-export PATH="$HOME/scripts:$PATH"
+export PATH="$HOME/.scripts:$PATH"
 
 # ****************************************************************************************************
 # Custom aliases / helpers (use alias to show list of aliases)
