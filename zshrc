@@ -274,7 +274,7 @@ export PATH="$HOME/.scripts:$PATH"
 # Always use neomutt
 alias mutt='neomutt'
 
-alias path="echo $PATH | cut -f 2 -d '=' | sed 's/:/\n/g'"
+alias path="echo \$PATH | cut -f 2 -d '=' | sed 's/:/\n/g'"
 
 # Flatten a git repo
 alias git-flatten='git reset $(git commit-tree HEAD^{tree} -m "Flatten")'
