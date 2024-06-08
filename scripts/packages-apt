@@ -1,0 +1,4 @@
+#!/bin/bash
+apt-mark showmanual | xargs -n 1 dpkg-query -s 2>/dev/null | awk -F: '
+  /^Package:/{pkg=$2}
+  /^Description:/{desc=$2; getline; gsub(/^ */, "", desc); print "\033[1m" pkg "\033[0m: " desc}'
