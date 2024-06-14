@@ -11,6 +11,7 @@
     ~/.gdbinit: gdbinit
     ~/.wgetrc: wgetrc
     ~/.tarsnaprc: tarsnaprc
+    ~/.mailcap: mailcap
     ~/.config/kitty:
       glob: true
       path: config/kitty/*

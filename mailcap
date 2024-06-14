@@ -1,0 +1,1 @@
+text/html; w3m -T text/html -dump %s; nametemplate=%s.html; needsterminal

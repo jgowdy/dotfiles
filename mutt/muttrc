@@ -18,4 +18,8 @@ set message_cachedir = "~/.mutt/cache/bodies"
 set certificate_file = "~/.mutt/certificates"
 set smtp_authenticators = "gssapi:login"
 set header_cache_compress = yes
+set implicit_autoview = yes
+alternative_order text/plain text/enriched text/html
+auto_view text/html
+set tmpdir = ~/.tmp
 source muttpassword
