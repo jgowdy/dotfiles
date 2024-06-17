@@ -80,6 +80,7 @@ else
         export TMP=$HOME/.tmp/
     fi
 fi
+export XDG_RUNTIME_DIR=${TMPDIR}users/$UID/
 
 # ****************************************************************************************************
 # Configure terminal keys
