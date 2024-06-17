@@ -21,8 +21,12 @@ export SAVEHIST=1000000000
 export HISTFILE=$HOME/.zsh_history
 export XDG_CONFIG_HOME="$HOME/.config"
 export XAUTHORITY="$HOME/.Xauthority"
-export DISPLAY=:0
 export TZ='America/Los_Angeles'
+
+# Don't mess with DISPLAY on macOS so we don't break XQuartz
+if [[ "$OSTYPE" != "darwin"* ]]; then
+  export DISPLAY=localhost:10.0
+fi
 
 # ****************************************************************************************************
 # Set telemetry opt-outs
