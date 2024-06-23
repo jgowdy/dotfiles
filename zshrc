@@ -276,6 +276,9 @@ export PATH="$HOME/.scripts:$PATH"
 # Custom aliases / helpers (use alias to show list of aliases)
 # ****************************************************************************************************
 
+# Use doas rather than sudo
+alias sudo='doas'
+
 # Always use neomutt
 alias mutt='neomutt'
 
