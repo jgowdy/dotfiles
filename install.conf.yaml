@@ -6,6 +6,7 @@
     ~/.zfunc: zfunc
     ~/.gitconfig: gitconfig
     ~/projects/godaddy/.gitconfig: projects/godaddy/gitconfig
+      create: true
     ~/.editorconfig: editorconfig
     ~/.screenrc: screenrc
     ~/.gitignore: gitignore
