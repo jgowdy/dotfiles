@@ -1,13 +1,28 @@
+# Default identity (personal)
 [user]
     name = Jeremiah Gowdy
     email = jeremiah@gowdy.me
     signingkey = 89A91D5D761C30A6A711F9CF4F2FF80BF95DEC07
+
+# Always GPG sign my commits
+[commit]
+    gpgsign = true
+[gpg]
+    program = gpg
+
+# Always rebase when pulling
 [pull]
     rebase = true
+
+# Implied branch names for push
 [push]
     default = current
+    autoSetupRemote = true
+
+# Default branch is main instead of master
 [init]
     defaultBranch = main
+
 [core]
     autocrlf = input
     preloadIndex = true
@@ -18,31 +33,22 @@
 
 [color]
     ui = auto
-[commit]
-	gpgsign = true
-[diff]
-    tool = kitty
-    guitool = kitty.gui
-[difftool]
-    prompt = false
-    trustExitCode = true
-[difftool "kitty"]
-    cmd = kitty +kitten diff $LOCAL $REMOTE
-[difftool "kitty.gui"]
-    cmd = kitty kitty +kitten diff $LOCAL $REMOTE
-[gpg]
-    program = gpg
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-#[gpg "ssh"]
-#	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-[apply]
-	whitespace = fix
 
+# Support git-lfs for certain repos
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+# Always use SSH instead of HTTPS
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
+# Fix whitespace errors rather than committing them
+[apply]
+    whitespace = fix
+
+# If in GoDaddy work projects directory, include overrides
 [includeIf "gitdir:~/projects/godaddy/"]
-	path = ~/projects/godaddy/.gitconfig
+    path = ~/projects/godaddy/.gitconfig
