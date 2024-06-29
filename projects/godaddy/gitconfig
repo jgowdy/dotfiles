@@ -1,0 +1,7 @@
+[user]
+	name = Jeremiah Gowdy
+	email = jgowdy@godaddy.com
+	signingkey = 3F6F832034B39FDB19E3BA876E1B621F27FAAAE3
+
+[core]
+	sshCommand = "ssh -i ~/.ssh/id_ed25519-godaddy"
