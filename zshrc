@@ -281,6 +281,14 @@ if [[ "$OSTYPE" != "darwin"* ]]; then
     alias sudo='doas'
 fi
 
+# Use xman on MacOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    function xman() {
+        open x-man-page://$1
+    }
+    alias man='xman'
+fi
+
 # Always use neomutt
 alias mutt='neomutt'
 
