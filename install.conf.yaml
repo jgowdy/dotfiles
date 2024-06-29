@@ -5,7 +5,8 @@
     ~/.zshrc: zshrc
     ~/.zfunc: zfunc
     ~/.gitconfig: gitconfig
-    ~/projects/godaddy/.gitconfig: projects/godaddy/gitconfig
+    ~/projects/godaddy/.gitconfig:
+      path: projects/godaddy/gitconfig
       create: true
     ~/.editorconfig: editorconfig
     ~/.screenrc: screenrc
