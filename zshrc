@@ -121,6 +121,7 @@ popd()
 alias cd='pushd'
 alias back='popd'
 alias flip='pushd_builtin'
+alias cleard='pushd -0 && dirs -c'
 
 # ****************************************************************************************************
 # Setup prompt / PS1
