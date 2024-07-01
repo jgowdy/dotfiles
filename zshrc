@@ -264,7 +264,6 @@ if [[ -d $HOME/.pyenv ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
     cached_source "pyenv" "pyenv init --path"
-    #eval "$(pyenv init --path)"
 fi
 
 # ****************************************************************************************************
@@ -285,17 +284,17 @@ export PATH="$HOME/.scripts:$PATH"
 # Custom aliases / helpers (use alias to show list of aliases)
 # ****************************************************************************************************
 
-# Use doas rather than sudo on Linux
 if [[ "$OSTYPE" != "darwin"* ]]; then
+    # Use doas rather than sudo on Linux
     alias sudo='doas'
-fi
-
-# Use xman on MacOS
-if [[ "$OSTYPE" == "darwin"* ]]; then
+    alias update='doas apt update && doas apt upgrade -y && brew update && brew upgrade'
+else
+    # Use xman on MacOS
     function xman() {
         open x-man-page://$1
     }
     alias man='xman'
+    alias update='brew update && brew upgrade'
 fi
 
 # Always use neomutt
