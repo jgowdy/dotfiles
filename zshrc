@@ -164,19 +164,22 @@ if [[ "$HOMEBREW_PREFIX" != "" && -e "$HOMEBREW_PREFIX" ]]; then
     # Ensure that Homebrew Cask apps are not quarantined
     export HOMEBREW_CASK_OPTS=--no-quarantine
 
-    # Use Homebrew GNU ls if it exists
-    if [ -e $HOMEBREW_PREFIX/bin/gls ] ; then
-        alias ls="$HOMEBREW_PREFIX/bin/gls -lFG --color=auto"
+    # Use Homebrew lsd or GNU ls if it exists
+    if [ -e $HOMEBREW_PREFIX/bin/lsd ] ; then
+        alias ls="$HOMEBREW_PREFIX/bin/lsd -lFG --color=auto"
     else
-        if [[ "$OSTYPE" == "darwin"* ]]; then
-            # Darwin's built in BSD ls
-            alias ls="ls -lFG"
+        if [ -e $HOMEBREW_PREFIX/bin/gls ] ; then
+        alias ls="$HOMEBREW_PREFIX/bin/gls -lFG --color=auto"
         else
-            # Linux built in gnuls
-            alias ls="ls -lFG --color=auto"
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                # Darwin's built in BSD ls
+                alias ls="ls -lFG"
+            else
+                # Linux built in gnuls
+                alias ls="ls -lFG --color=auto"
+            fi
         fi
     fi
-
     # All GNU utilities get prepended to the path
     cached_source "gnubins" "RESULT=''; for p in \$(find ${HOMEBREW_PREFIX}/Cellar/*/*/libexec -maxdepth 1 -type d -name gnubin); do RESULT=\"\${p}:\${RESULT}\"; done; echo export GNUBINS=\$RESULT"
 
