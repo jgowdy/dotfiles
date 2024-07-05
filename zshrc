@@ -203,6 +203,11 @@ if [[ "$HOMEBREW_PREFIX" != "" && -e "$HOMEBREW_PREFIX" ]]; then
     if [[ -d $HOMEBREW_PREFIX/opt/openjdk/bin ]]; then
         export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
     fi
+
+    # Configure fzf's zsh autocomplete and hotkeys (using cached_source)
+    if [ -e $HOMEBREW_PREFIX/opt/fzf/bin/fzf ]; then
+        cached_source "fzf-zsh" "fzf --zsh"
+    fi
 fi
 
 # ****************************************************************************************************
