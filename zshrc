@@ -211,6 +211,11 @@ if [[ "$HOMEBREW_PREFIX" != "" && -e "$HOMEBREW_PREFIX" ]]; then
     if [ -e $HOMEBREW_PREFIX/opt/fzf/bin/fzf ]; then
         cached_source "fzf-zsh" "fzf --zsh"
     fi
+
+    # If we have trash-cli installed, alias trash-put over rm
+    if [ -e $HOMEBREW_PREFIX/opt/trash-cli/bin/trash-put ]; then
+        alias rm="$HOMEBREW_PREFIX/opt/trash-cli/bin/trash-put"
+    fi
 fi
 
 # ****************************************************************************************************
