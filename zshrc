@@ -135,16 +135,19 @@ cached_source 'wsl' "echo export WSL_FLAG=\$(grep -q -s -i microsoft /proc/versi
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Make macOS prompt blue
     OS_COLOR='%F{33}'
+    OS_ICON=$'\uF8FF'
 elif [[ "$WSL_FLAG" == "1" ]]; then
     # Make WSL prompt fuchsia
     OS_COLOR='%F{13}'
     export SYSTEM='Linux/WSL'
+    OS_ICON=''
 else
     # Make Ubuntu prompt green
     OS_COLOR='%F{82}'
+    OS_ICON=''
 fi
 
-export PS1="${OS_COLOR}%n%F{255}@${OS_COLOR}%m (%F{226}${MACHINE}%F{255}/%F{226}${SYSTEM}${OS_COLOR}) %1~ %f %# "
+export PS1="${OS_COLOR}%n%F{255}@${OS_COLOR}%m (%F{226}${MACHINE}%F{255}/%F{226}${OS_ICON}${SYSTEM}${OS_COLOR}) %1~ %f %# "
 
 # ****************************************************************************************************
 # Setup Homebrew and GNU utilities
