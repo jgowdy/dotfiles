@@ -6,6 +6,8 @@ function cached_source() {
     # Optimize for cache file existing at the cost of an error message if it doesn't
     if ! source $cache_file ; then
         echo "Building $cache_file cache file using $2"
+        # Ensure cache directory exists
+        mkdir -p "$HOME/.cache"
         if ! eval "$2 > $cache_file" ; then
             echo "Failed to execute $2"
             rm $cache_file
