@@ -33,3 +33,12 @@
       glob: true
       path: scripts/*
       create: true
+    ~/.local/bin/aws_creds_sync.sh:
+      path: bin/aws_creds_sync.sh
+      create: true
+    ~/.local/bin/gen-aws-profiles.py:
+      path: bin/gen-aws-profiles.py
+      create: true
+    ~/.local/bin/aws-okta-auth:
+      path: bin/aws-okta-auth
+      create: true
