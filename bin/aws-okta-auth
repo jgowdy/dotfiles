@@ -1,0 +1,49 @@
+#!/bin/zsh
+# aws-okta-auth — thin wrapper around aws-okta-processor that injects the Okta
+# password from the macOS Keychain so credential_process refreshes need only a
+# YubiKey touch (no password typing). The MFA factor (YubiKey/Hardware Token) is
+# ALWAYS read interactively — it is never stored or automated, so this preserves
+# real two-factor auth: the password at rest is useless without the physical key.
+#
+# Falls back to interactive password entry if the Keychain item is missing, and
+# is a no-op on systems without `security` (e.g. Linux) — there it just runs
+# aws-okta-processor normally.
+#
+# Keychain item: service "aws-okta-password", account = the -u/--user value.
+#   security add-generic-password -U -a <user> -s aws-okta-password -w
+# (the -w with no value prompts twice, hidden — keeps the password out of
+#  shell history and the process table).
+
+emulate -L zsh
+set -u
+
+REAL_BIN="${AWS_OKTA_BIN:-$HOME/.local/bin/aws-okta-processor}"
+KEYCHAIN_SERVICE="${AWS_OKTA_KEYCHAIN_SERVICE:-aws-okta-password}"
+
+# Pull the Okta username from the forwarded args (-u/--user[=]), so the Keychain
+# account matches whatever profile invoked us. Fall back to $AWS_OKTA_USER/$USER.
+user=""
+prev=""
+for a in "$@"; do
+    case "$prev" in
+        -u|--user) user="$a"; break ;;
+    esac
+    case "$a" in
+        --user=*) user="${a#--user=}"; break ;;
+        -u=*)     user="${a#-u=}"; break ;;
+    esac
+    prev="$a"
+done
+[[ -z "$user" ]] && user="${AWS_OKTA_USER:-$USER}"
+
+# Look up the password silently; only inject if we actually found one.
+pass=""
+if command -v security >/dev/null 2>&1; then
+    pass="$(security find-generic-password -a "$user" -s "$KEYCHAIN_SERVICE" -w 2>/dev/null)"
+fi
+
+if [[ -n "$pass" ]]; then
+    AWS_OKTA_PASS="$pass" exec "$REAL_BIN" "$@"
+else
+    exec "$REAL_BIN" "$@"
+fi
